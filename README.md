@@ -6,7 +6,7 @@ Mi Punto es una plataforma web que permite a los usuarios descubrir negocios loc
 
 Este repositorio contiene la capa de presentación del sistema, encargada de la interacción con el usuario.
 
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---
 
 ## 🚀 Tecnologías utilizadas
 
@@ -15,7 +15,7 @@ Este repositorio contiene la capa de presentación del sistema, encargada de la 
 * shadcn/ui (componentes)
 * Jotai (manejo de estado)
 
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---
 
 ## 🧠 Arquitectura
 
@@ -23,7 +23,7 @@ El proyecto implementa **Screaming Architecture** con un enfoque de **arquitectu
 
 Esto permite mayor escalabilidad, mantenibilidad y claridad en el desarrollo.
 
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---
 
 ## 📁 Estructura del proyecto
 
@@ -35,37 +35,43 @@ src/
 │
 └── main.jsx        # Punto de entrada
 
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---
 
 ## ⚙️ Instalación y ejecución
 
 1. Clonar el repositorio:
 
-git clone <https://github.com/NataBravo/mi-punto-frontend>
+```
+git clone <URL_DEL_REPOSITORIO>
+```
 
 2. Instalar dependencias:
 
+```
 npm install
+```
 
 3. Ejecutar el proyecto:
 
+```
 npm run dev
+```
 
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+---
 
 ## 🧪 Estado del proyecto
 
 En desarrollo – implementación por sprints bajo metodología ágil Scrum.
 
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---
 
 ## 👥 Equipo de desarrollo
 
 * Natalia Bravo
-* Juan Camilo Campo
+* Juan Camilo
 
+---
 
+## 📄 Notas
 
 Este proyecto hace parte del desarrollo de un MVP, siguiendo una construcción incremental basada en historias de usuario definidas en Jira.
