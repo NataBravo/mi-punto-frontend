@@ -69,7 +69,7 @@ En desarrollo – implementación por sprints bajo metodología ágil Scrum.
 ## 👥 Equipo de desarrollo
 
 * Natalia Bravo
-* Juan Camilo
+* Juan Camilo Campo
 
 ---
 
