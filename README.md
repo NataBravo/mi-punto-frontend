@@ -27,6 +27,7 @@ Esto permite mayor escalabilidad, mantenibilidad y claridad en el desarrollo.
 
 ## 📁 Estructura del proyecto
 
+```
 src/
 │
 ├── modules/        # Módulos por dominio (auth, business, reviews)
@@ -34,7 +35,7 @@ src/
 ├── app/            # Configuración global, rutas y estado
 │
 └── main.jsx        # Punto de entrada
-
+```
 ---
 
 ## ⚙️ Instalación y ejecución
