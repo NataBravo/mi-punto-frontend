@@ -1,71 +1,16 @@
-# Mi Punto – Frontend
+# React + Vite
 
-## 📌 Descripción del proyecto
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Mi Punto es una plataforma web que permite a los usuarios descubrir negocios locales, visualizar su ubicación en un mapa, consultar información relevante y dejar reseñas.
+Currently, two official plugins are available:
 
-Este repositorio contiene la capa de presentación del sistema, encargada de la interacción con el usuario.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## React Compiler
 
-## 🚀 Tecnologías utilizadas
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-* React (con Vite)
-* TailwindCSS
-* shadcn/ui (componentes)
-* Jotai (manejo de estado)
+## Expanding the ESLint configuration
 
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-## 🧠 Arquitectura
-
-El proyecto implementa **Screaming Architecture** con un enfoque de **arquitectura monolítica modular**, donde la estructura del código está organizada por dominios del negocio en lugar de capas técnicas.
-
-Esto permite mayor escalabilidad, mantenibilidad y claridad en el desarrollo.
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-## 📁 Estructura del proyecto
-
-src/
-│
-├── modules/        # Módulos por dominio (auth, business, reviews)
-├── shared/         # Componentes y utilidades reutilizables
-├── app/            # Configuración global, rutas y estado
-│
-└── main.jsx        # Punto de entrada
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-## ⚙️ Instalación y ejecución
-
-1. Clonar el repositorio:
-
-git clone <https://github.com/NataBravo/mi-punto-frontend>
-
-2. Instalar dependencias:
-
-npm install
-
-3. Ejecutar el proyecto:
-
-npm run dev
-
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-## 🧪 Estado del proyecto
-
-En desarrollo – implementación por sprints bajo metodología ágil Scrum.
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-## 👥 Equipo de desarrollo
-
-* Natalia Bravo
-* Juan Camilo Campo
-
-
-
-Este proyecto hace parte del desarrollo de un MVP, siguiendo una construcción incremental basada en historias de usuario definidas en Jira.
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
