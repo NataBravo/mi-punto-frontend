@@ -1,0 +1,41 @@
+@import './fonts.css';
+@import './tailwind.css';
+@import './theme.css';
+@import 'leaflet/dist/leaflet.css';
+
+/* Marcador "tú estás aquí" para Leaflet (usado por MapReadOnly). */
+.user-location-marker {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+.user-location-marker .user-location-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 14px;
+  height: 14px;
+  background: #2563eb;
+  border: 3px solid white;
+  border-radius: 9999px;
+  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.4), 0 2px 6px rgba(0, 0, 0, 0.25);
+  z-index: 2;
+}
+.user-location-marker .user-location-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 14px;
+  height: 14px;
+  background: rgba(37, 99, 235, 0.45);
+  border-radius: 9999px;
+  animation: user-location-pulse 1.6s ease-out infinite;
+  z-index: 1;
+}
+@keyframes user-location-pulse {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+  100% { transform: translate(-50%, -50%) scale(3); opacity: 0; }
+}
