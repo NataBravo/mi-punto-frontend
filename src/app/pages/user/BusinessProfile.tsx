@@ -40,11 +40,20 @@ export default function BusinessProfile() {
   return (
     <div className="space-y-6">
       <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-        <div className="aspect-[16/6] bg-gradient-to-br from-blue-100 to-blue-200">
+        <div className="relative aspect-[16/6] bg-gradient-to-br from-blue-100 to-blue-200">
           {cover && <img src={cover} alt={b.name} className="w-full h-full object-cover" />}
+          {b.logo_url && (
+            <div className="absolute -bottom-8 left-6 w-20 h-20 rounded-xl bg-white shadow-md border border-white overflow-hidden">
+              <img
+                src={b.logo_url}
+                alt={`Logo ${b.name}`}
+                className="w-full h-full object-contain"
+              />
+            </div>
+          )}
         </div>
 
-        <div className="p-6">
+        <div className={`p-6 ${b.logo_url ? "pt-12" : ""}`}>
           <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
             <div>
               <h1 className="text-3xl font-bold text-gray-900 mb-1">{b.name}</h1>

@@ -1,12 +1,14 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-import type { MediaOut } from "@/modules/businesses/types";
+import type { MediaOut, MyBusiness } from "@/modules/businesses/types";
 
 import {
   deleteMedia,
+  deleteMyBusinessLogo,
   listMyBusinessMedia,
   setPrimaryMedia,
   uploadMyBusinessImage,
+  uploadMyBusinessLogo,
 } from "./services";
 
 const myMediaKey = ["uploads", "business", "me"] as const;
@@ -44,5 +46,29 @@ export function useDeleteMedia() {
   return useMutation<void, Error, number>({
     mutationFn: deleteMedia,
     onSuccess: () => invalidateAfterMutation(qc),
+  });
+}
+
+function invalidateAfterLogoChange(
+  qc: ReturnType<typeof useQueryClient>,
+  business: MyBusiness,
+) {
+  qc.setQueryData(["businesses", "me"], business);
+  qc.invalidateQueries({ queryKey: ["businesses", "public"] });
+}
+
+export function useUploadMyBusinessLogo() {
+  const qc = useQueryClient();
+  return useMutation<MyBusiness, Error, File>({
+    mutationFn: uploadMyBusinessLogo,
+    onSuccess: (data) => invalidateAfterLogoChange(qc, data),
+  });
+}
+
+export function useDeleteMyBusinessLogo() {
+  const qc = useQueryClient();
+  return useMutation<MyBusiness, Error, void>({
+    mutationFn: deleteMyBusinessLogo,
+    onSuccess: (data) => invalidateAfterLogoChange(qc, data),
   });
 }

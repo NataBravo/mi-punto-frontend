@@ -33,6 +33,7 @@ export interface BusinessDetail {
   is_active: boolean;
   category: CategoryOut;
   cover_url: string | null;
+  logo_url: string | null;
   media: MediaOut[];
   average_rating: number;
   review_count: number;
@@ -61,6 +62,7 @@ export interface MyBusiness {
   is_active: boolean;
   category: CategoryOut;
   cover_url: string | null;
+  logo_url: string | null;
   media: MediaOut[];
   lat: number | null;
   lng: number | null;
@@ -105,6 +107,7 @@ export interface PublicBusinessSummary {
   address: string;
   category: CategoryOut;
   cover_url: string | null;
+  logo_url: string | null;
   average_rating: number;
   review_count: number;
   lat: number | null;
@@ -123,6 +126,7 @@ export interface PublicBusinessDetail {
   hours: string | null;
   category: CategoryOut;
   cover_url: string | null;
+  logo_url: string | null;
   media: MediaOut[];
   average_rating: number;
   review_count: number;

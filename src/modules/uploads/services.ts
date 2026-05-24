@@ -1,6 +1,6 @@
 import { api } from "@/lib/api";
 
-import type { MediaOut } from "@/modules/businesses/types";
+import type { MediaOut, MyBusiness } from "@/modules/businesses/types";
 
 export function uploadMyBusinessImage(file: File) {
   const fd = new FormData();
@@ -18,4 +18,14 @@ export function setPrimaryMedia(mediaId: number) {
 
 export function deleteMedia(mediaId: number) {
   return api<void>(`/uploads-api/media/${mediaId}`, { method: "DELETE" });
+}
+
+export function uploadMyBusinessLogo(file: File) {
+  const fd = new FormData();
+  fd.append("file", file);
+  return api<MyBusiness>("/uploads-api/business/me/logo", { method: "POST", body: fd });
+}
+
+export function deleteMyBusinessLogo() {
+  return api<MyBusiness>("/uploads-api/business/me/logo", { method: "DELETE" });
 }
