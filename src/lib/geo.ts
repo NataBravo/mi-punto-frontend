@@ -57,6 +57,16 @@ export function haversineKm(a: Coordinates, b: Coordinates): number {
   return R * c;
 }
 
+/**
+ * URL universal de Google Maps centrada en unas coordenadas.
+ * Funciona en navegadores y abre la app nativa en iOS/Android cuando está instalada.
+ */
+export function buildGoogleMapsUrl(lat: number, lng: number): string {
+  const safeLat = Number(lat).toFixed(6);
+  const safeLng = Number(lng).toFixed(6);
+  return `https://www.google.com/maps/search/?api=1&query=${safeLat},${safeLng}`;
+}
+
 /** Coordenadas centrales por ciudad (fallback cuando el usuario solo elige ciudad). */
 export const CITY_COORDS: Record<string, Coordinates> = {
   Bogotá: { lat: 4.6533, lng: -74.0836 },
