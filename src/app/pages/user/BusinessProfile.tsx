@@ -1,4 +1,4 @@
-import { Clock, Mail, MapPin, MessageSquare, Phone, Star } from "lucide-react";
+import { Clock, ExternalLink, Mail, MapPin, MessageSquare, Navigation, Phone, Star } from "lucide-react";
 import { Link, useParams } from "react-router";
 
 import { EmptyState } from "@/app/components/EmptyState";
@@ -6,6 +6,7 @@ import { ErrorState } from "@/app/components/ErrorState";
 import { LoadingSpinner } from "@/app/components/LoadingSpinner";
 import { MapReadOnly } from "@/app/components/Map";
 import { StarRating } from "@/app/components/StarRating";
+import { buildGoogleMapsUrl } from "@/lib/geo";
 import { usePublicBusinessDetail } from "@/modules/businesses/hooks";
 import { useBusinessReviews } from "@/modules/reviews/hooks";
 
@@ -102,7 +103,18 @@ export default function BusinessProfile() {
 
           {b.lat !== null && b.lng !== null && (
             <div className="bg-white rounded-lg shadow-sm p-6">
-              <h2 className="font-semibold text-lg mb-4">Ubicación</h2>
+              <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+                <h2 className="font-semibold text-lg">Ubicación</h2>
+                <a
+                  href={buildGoogleMapsUrl(b.lat, b.lng)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700"
+                >
+                  <Navigation className="w-4 h-4" />
+                  Cómo llegar
+                </a>
+              </div>
               <MapReadOnly
                 center={[b.lat, b.lng]}
                 zoom={16}
@@ -171,6 +183,20 @@ export default function BusinessProfile() {
 
           <InfoRow icon={<MapPin className="w-5 h-5 text-gray-500" />} label="Dirección">
             {b.address || "—"}, {b.city}
+            {b.lat !== null && b.lng !== null && (
+              <>
+                {" · "}
+                <a
+                  href={buildGoogleMapsUrl(b.lat, b.lng)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-blue-600 hover:underline whitespace-nowrap"
+                >
+                  Abrir en Google Maps
+                  <ExternalLink className="inline w-3.5 h-3.5 ml-0.5 -mt-0.5" />
+                </a>
+              </>
+            )}
           </InfoRow>
 
           {b.phone && (
