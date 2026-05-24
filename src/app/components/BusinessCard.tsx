@@ -16,6 +16,7 @@ export function BusinessCard({ business }: BusinessCardProps) {
     average_rating,
     review_count,
     cover_url,
+    logo_url,
     distance_km,
     city,
   } = business;
@@ -35,6 +36,13 @@ export function BusinessCard({ business }: BusinessCardProps) {
         ) : (
           <div className="w-full h-full flex items-center justify-center text-blue-400">
             <ImageIcon className="w-12 h-12" />
+
+          </div>
+        )}
+        {logo_url && (
+          <div className="absolute bottom-2 left-2 w-12 h-12 rounded-lg bg-white shadow-md border border-white overflow-hidden">
+            <img src={logo_url} alt={`Logo ${name}`} className="w-full h-full object-contain" />
+
           </div>
         )}
       </div>

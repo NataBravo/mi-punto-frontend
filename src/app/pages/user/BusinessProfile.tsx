@@ -1,4 +1,4 @@
-import { Clock, Mail, MapPin, MessageSquare, Phone, Star } from "lucide-react";
+import { Clock, ExternalLink, Facebook, Instagram, Mail, MapPin, MessageSquare, Navigation, Phone, Star } from "lucide-react";
 import { Link, useParams } from "react-router";
 
 import { EmptyState } from "@/app/components/EmptyState";
@@ -6,6 +6,7 @@ import { ErrorState } from "@/app/components/ErrorState";
 import { LoadingSpinner } from "@/app/components/LoadingSpinner";
 import { MapReadOnly } from "@/app/components/Map";
 import { StarRating } from "@/app/components/StarRating";
+import { buildGoogleMapsUrl } from "@/lib/geo";
 import { usePublicBusinessDetail } from "@/modules/businesses/hooks";
 import { useBusinessReviews } from "@/modules/reviews/hooks";
 
@@ -40,11 +41,20 @@ export default function BusinessProfile() {
   return (
     <div className="space-y-6">
       <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-        <div className="aspect-[16/6] bg-gradient-to-br from-blue-100 to-blue-200">
+        <div className="relative aspect-[16/6] bg-gradient-to-br from-blue-100 to-blue-200">
           {cover && <img src={cover} alt={b.name} className="w-full h-full object-cover" />}
+          {b.logo_url && (
+            <div className="absolute -bottom-8 left-6 w-20 h-20 rounded-xl bg-white shadow-md border border-white overflow-hidden">
+              <img
+                src={b.logo_url}
+                alt={`Logo ${b.name}`}
+                className="w-full h-full object-contain"
+              />
+            </div>
+          )}
         </div>
 
-        <div className="p-6">
+        <div className={`p-6 ${b.logo_url ? "pt-12" : ""}`}>
           <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
             <div>
               <h1 className="text-3xl font-bold text-gray-900 mb-1">{b.name}</h1>
@@ -93,7 +103,18 @@ export default function BusinessProfile() {
 
           {b.lat !== null && b.lng !== null && (
             <div className="bg-white rounded-lg shadow-sm p-6">
-              <h2 className="font-semibold text-lg mb-4">Ubicación</h2>
+              <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+                <h2 className="font-semibold text-lg">Ubicación</h2>
+                <a
+                  href={buildGoogleMapsUrl(b.lat, b.lng)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700"
+                >
+                  <Navigation className="w-4 h-4" />
+                  Cómo llegar
+                </a>
+              </div>
               <MapReadOnly
                 center={[b.lat, b.lng]}
                 zoom={16}
@@ -162,6 +183,20 @@ export default function BusinessProfile() {
 
           <InfoRow icon={<MapPin className="w-5 h-5 text-gray-500" />} label="Dirección">
             {b.address || "—"}, {b.city}
+            {b.lat !== null && b.lng !== null && (
+              <>
+                {" · "}
+                <a
+                  href={buildGoogleMapsUrl(b.lat, b.lng)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-blue-600 hover:underline whitespace-nowrap"
+                >
+                  Abrir en Google Maps
+                  <ExternalLink className="inline w-3.5 h-3.5 ml-0.5 -mt-0.5" />
+                </a>
+              </>
+            )}
           </InfoRow>
 
           {b.phone && (
@@ -180,6 +215,40 @@ export default function BusinessProfile() {
             <InfoRow icon={<Clock className="w-5 h-5 text-gray-500" />} label="Horario">
               {b.hours}
             </InfoRow>
+          )}
+
+          {(b.instagram_url || b.facebook_url) && (
+            <div className="pt-2 border-t border-gray-100">
+              <p className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2">
+                Redes sociales
+              </p>
+              <div className="flex items-center gap-2">
+                {b.instagram_url && (
+                  <a
+                    href={b.instagram_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Instagram"
+                    title="Instagram"
+                    className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-pink-50 text-pink-600 hover:bg-pink-100"
+                  >
+                    <Instagram className="w-5 h-5" />
+                  </a>
+                )}
+                {b.facebook_url && (
+                  <a
+                    href={b.facebook_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Facebook"
+                    title="Facebook"
+                    className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-blue-50 text-blue-600 hover:bg-blue-100"
+                  >
+                    <Facebook className="w-5 h-5" />
+                  </a>
+                )}
+              </div>
+            </div>
           )}
         </div>
       </div>

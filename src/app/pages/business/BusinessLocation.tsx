@@ -1,10 +1,11 @@
-import { Loader2, MapPin, Save } from "lucide-react";
+import { ExternalLink, Loader2, MapPin, Save } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 import { ErrorState } from "@/app/components/ErrorState";
 import { LoadingSpinner } from "@/app/components/LoadingSpinner";
 import { MapDraggable } from "@/app/components/Map";
+import { buildGoogleMapsUrl } from "@/lib/geo";
 import { useMyBusiness, useUpdateMyBusinessLocation } from "@/modules/businesses/hooks";
 
 const DEFAULT_CENTER: [number, number] = [4.6533, -74.0836]; // Bogotá
@@ -115,7 +116,7 @@ export default function BusinessLocation() {
           </div>
         </div>
 
-        <div className="flex items-center gap-3 pt-2">
+        <div className="flex flex-wrap items-center gap-3 pt-2">
           <button
             onClick={handleSave}
             disabled={update.isPending}
@@ -128,6 +129,17 @@ export default function BusinessLocation() {
             )}
             Guardar ubicación
           </button>
+
+          <a
+            href={buildGoogleMapsUrl(position[0], position[1])}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg font-medium border border-gray-300 text-gray-700 hover:bg-gray-50"
+            title="Verifica que las coordenadas abran el punto correcto en Google Maps"
+          >
+            <ExternalLink className="w-4 h-4" />
+            Ver en Google Maps
+          </a>
         </div>
       </div>
     </div>
