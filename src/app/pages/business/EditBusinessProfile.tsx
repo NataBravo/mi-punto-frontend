@@ -31,6 +31,30 @@ interface FormValues {
   phone: string;
   email: string;
   hours: string;
+  instagram_url: string;
+  facebook_url: string;
+}
+
+const INSTAGRAM_HOSTS = ["instagram.com", "instagr.am"];
+const FACEBOOK_HOSTS = ["facebook.com", "fb.com", "fb.me", "m.facebook.com"];
+
+function validateSocialUrl(raw: string, allowedHosts: string[]): true | string {
+  const value = raw.trim();
+  if (!value) return true;
+  const withScheme = /^https?:\/\//i.test(value) ? value : `https://${value}`;
+  let parsed: URL;
+  try {
+    parsed = new URL(withScheme);
+  } catch {
+    return "URL inválida";
+  }
+  if (parsed.protocol !== "http:" && parsed.protocol !== "https:") {
+    return "URL inválida";
+  }
+  const host = parsed.hostname.toLowerCase().replace(/^www\./, "");
+  const ok = allowedHosts.some((h) => host === h || host.endsWith("." + h));
+  if (!ok) return `Debe apuntar a ${allowedHosts.slice(0, 2).join(" o ")}`;
+  return true;
 }
 
 export default function EditBusinessProfile() {
@@ -56,6 +80,8 @@ export default function EditBusinessProfile() {
       phone: "",
       email: "",
       hours: "",
+      instagram_url: "",
+      facebook_url: "",
     },
   });
 
@@ -70,6 +96,8 @@ export default function EditBusinessProfile() {
         phone: business.phone ?? "",
         email: business.email ?? "",
         hours: business.hours ?? "",
+        instagram_url: business.instagram_url ?? "",
+        facebook_url: business.facebook_url ?? "",
       });
     }
   }, [business, form]);
@@ -90,6 +118,8 @@ export default function EditBusinessProfile() {
           phone: values.phone || null,
           email: values.email || null,
           hours: values.hours || null,
+          instagram_url: values.instagram_url.trim() || null,
+          facebook_url: values.facebook_url.trim() || null,
         };
         await createMutation.mutateAsync(payload);
         toast.success("Negocio creado");
@@ -103,6 +133,8 @@ export default function EditBusinessProfile() {
           phone: values.phone || null,
           email: values.email || null,
           hours: values.hours || null,
+          instagram_url: values.instagram_url.trim() || null,
+          facebook_url: values.facebook_url.trim() || null,
         };
         await updateMutation.mutateAsync(payload);
         toast.success("Cambios guardados");
@@ -300,6 +332,45 @@ export default function EditBusinessProfile() {
         <Field label="Horario">
           <input type="text" {...form.register("hours")} className="biz-input" />
         </Field>
+
+        <div className="border-t border-gray-100 pt-5">
+          <h2 className="text-base font-semibold text-gray-900 mb-1">Redes sociales</h2>
+          <p className="text-sm text-gray-500 mb-4">
+            Si dejas el campo vacío no se mostrará el enlace en el perfil público.
+          </p>
+          <div className="grid md:grid-cols-2 gap-5">
+            <Field label="Instagram">
+              <input
+                type="url"
+                {...form.register("instagram_url", {
+                  validate: (v) => validateSocialUrl(v, INSTAGRAM_HOSTS),
+                })}
+                className="biz-input"
+                placeholder="https://instagram.com/tu-negocio"
+              />
+              {form.formState.errors.instagram_url && (
+                <p className="text-sm text-red-600 mt-1">
+                  {form.formState.errors.instagram_url.message}
+                </p>
+              )}
+            </Field>
+            <Field label="Facebook">
+              <input
+                type="url"
+                {...form.register("facebook_url", {
+                  validate: (v) => validateSocialUrl(v, FACEBOOK_HOSTS),
+                })}
+                className="biz-input"
+                placeholder="https://facebook.com/tu-negocio"
+              />
+              {form.formState.errors.facebook_url && (
+                <p className="text-sm text-red-600 mt-1">
+                  {form.formState.errors.facebook_url.message}
+                </p>
+              )}
+            </Field>
+          </div>
+        </div>
 
         <div className="flex items-center gap-3 pt-2">
           <button
