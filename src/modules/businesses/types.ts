@@ -34,6 +34,8 @@ export interface BusinessDetail {
   category: CategoryOut;
   cover_url: string | null;
   logo_url: string | null;
+  instagram_url: string | null;
+  facebook_url: string | null;
   media: MediaOut[];
   average_rating: number;
   review_count: number;
@@ -63,6 +65,8 @@ export interface MyBusiness {
   category: CategoryOut;
   cover_url: string | null;
   logo_url: string | null;
+  instagram_url: string | null;
+  facebook_url: string | null;
   media: MediaOut[];
   lat: number | null;
   lng: number | null;
@@ -80,6 +84,8 @@ export interface BusinessCreateInput {
   phone?: string | null;
   email?: string | null;
   hours?: string | null;
+  instagram_url?: string | null;
+  facebook_url?: string | null;
 }
 
 export interface BusinessUpdateInput {
@@ -91,6 +97,8 @@ export interface BusinessUpdateInput {
   phone?: string | null;
   email?: string | null;
   hours?: string | null;
+  instagram_url?: string | null;
+  facebook_url?: string | null;
 }
 
 export interface BusinessLocationInput {
@@ -127,6 +135,8 @@ export interface PublicBusinessDetail {
   category: CategoryOut;
   cover_url: string | null;
   logo_url: string | null;
+  instagram_url: string | null;
+  facebook_url: string | null;
   media: MediaOut[];
   average_rating: number;
   review_count: number;

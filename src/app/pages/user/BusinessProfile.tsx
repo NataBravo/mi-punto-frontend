@@ -1,4 +1,4 @@
-import { Clock, ExternalLink, Mail, MapPin, MessageSquare, Navigation, Phone, Star } from "lucide-react";
+import { Clock, ExternalLink, Facebook, Instagram, Mail, MapPin, MessageSquare, Navigation, Phone, Star } from "lucide-react";
 import { Link, useParams } from "react-router";
 
 import { EmptyState } from "@/app/components/EmptyState";
@@ -215,6 +215,40 @@ export default function BusinessProfile() {
             <InfoRow icon={<Clock className="w-5 h-5 text-gray-500" />} label="Horario">
               {b.hours}
             </InfoRow>
+          )}
+
+          {(b.instagram_url || b.facebook_url) && (
+            <div className="pt-2 border-t border-gray-100">
+              <p className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2">
+                Redes sociales
+              </p>
+              <div className="flex items-center gap-2">
+                {b.instagram_url && (
+                  <a
+                    href={b.instagram_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Instagram"
+                    title="Instagram"
+                    className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-pink-50 text-pink-600 hover:bg-pink-100"
+                  >
+                    <Instagram className="w-5 h-5" />
+                  </a>
+                )}
+                {b.facebook_url && (
+                  <a
+                    href={b.facebook_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Facebook"
+                    title="Facebook"
+                    className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-blue-50 text-blue-600 hover:bg-blue-100"
+                  >
+                    <Facebook className="w-5 h-5" />
+                  </a>
+                )}
+              </div>
+            </div>
           )}
         </div>
       </div>
